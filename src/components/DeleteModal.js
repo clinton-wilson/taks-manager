@@ -1,35 +1,29 @@
-import React from "react";
-
 const DeleteModal = ({ task, onCancel, onConfirm }) => {
-  return (
-    <div style={{
-      position: "fixed",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      backgroundColor: "rgba(0, 0, 0, 0.5)",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-    }}>
-      <div style={{
-        backgroundColor: "#fff",
-        padding: "1rem",
-        borderRadius: "5px",
-        boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-        textAlign: "center",
-      }}>
-        <p>Are you sure you want to delete the task "{task.text}"?</p>
-        <div style={{ marginTop: "1rem" }}>
-          <button onClick={onCancel} style={{ marginRight: "0.5rem" }}>Cancel</button>
-          <button onClick={onConfirm} style={{ backgroundColor: "red", color: "white" }}>
-            Confirm
-          </button>
+    if (!task) return null; // Prevent rendering if task is null or undefined
+  
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div className="bg-white p-6 rounded-lg shadow-lg">
+          <p className="text-lg font-medium">
+            Are you sure you want to delete "{task.text}"?
+          </p>
+          <div className="flex justify-end space-x-4 mt-4">
+            <button
+              onClick={onCancel}
+              className="px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300"
+            >
+              Cancel
+            </button>
+            <button
+              onClick={onConfirm}
+              className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+            >
+              Confirm
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
-
-export default DeleteModal;
+    );
+  };
+  
+  export default DeleteModal;

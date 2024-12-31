@@ -20,21 +20,27 @@ const AddTaskForm = ({ addTask }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col md:flex-row items-center gap-4 mt-4 bg-gray-50 p-4 rounded-md shadow-sm"
+    >
       <input
         type="text"
         placeholder="Task description"
         value={taskText}
         onChange={(e) => setTaskText(e.target.value)}
-        style={{ marginRight: "0.5rem", padding: "0.5rem", width: "60%" }}
+        className="flex-grow p-3 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
       />
       <input
         type="date"
         value={dueDate}
         onChange={(e) => setDueDate(e.target.value)}
-        style={{ marginRight: "0.5rem", padding: "0.5rem" }}
+        className="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300"
       />
-      <button type="submit" style={{ padding: "0.5rem" }}>
+      <button
+        type="submit"
+        className="p-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
+      >
         Add Task
       </button>
     </form>

@@ -1,11 +1,14 @@
-import React from "react";
-
 const Header = () => {
-  return (
-    <header style={{ textAlign: "center", padding: "1rem", backgroundColor: "#282c34", color: "white" }}>
-      <h1>Task Manager</h1>
-    </header>
-  );
-};
-
-export default Header;
+    return (
+      <header className="bg-blue-500 text-white py-6 shadow-md">
+        <div className="max-w-3xl mx-auto text-center">
+          <h1 className="text-4xl font-bold mb-2">Task Manager</h1>
+          <p className="text-lg text-blue-200">
+            Organize your tasks and stay on top of your goals.
+          </p>
+        </div>
+      </header>
+    );
+  };
+  
+  export default Header;
