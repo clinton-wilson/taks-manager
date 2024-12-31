@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
+import SignupForm from "./SignupForm";
+import LoginForm from "./LoginForm";
 import Task from "./Task";
 import AddTaskForm from "./AddTaskForm";
 import DeleteModal from "./DeleteModal";
+import { signOut } from "firebase/auth";
+import { auth } from "./firebase"; // Import your Firebase auth instance
 
 const TaskList = () => {
   const [tasks, setTasks] = useState(() => {
@@ -13,10 +17,31 @@ const TaskList = () => {
   const [search, setSearch] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [taskToDelete, setTaskToDelete] = useState(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
+
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth); // Firebase signOut method
+      setUser(null); // Clear the user state after signing out
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
+
+  if (!user) {
+    return (
+      <div className="flex flex-col gap-8">
+        <h1 className="text-3xl font-bold text-center">Task Manager</h1>
+        <SignupForm setUser={setUser} />
+        <p className="text-center">or</p>
+        <LoginForm setUser={setUser} />
+      </div>
+    );
+  }
 
   const addTask = (task) => setTasks([...tasks, task]);
 
@@ -64,9 +89,15 @@ const TaskList = () => {
   return (
     <div className="min-h-screen bg-gray-100 py-10">
       <div className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md">
-        <h1 className="text-3xl font-bold text-gray-800 text-center mb-6">
-          Task Manager
-        </h1>
+        <div className="flex justify-between items-center mb-6">
+          <h1 className="text-3xl font-bold text-center">Welcome, {user.email}</h1>
+          <button
+            onClick={handleSignOut}
+            className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:ring-red-300"
+          >
+            Sign Out
+          </button>
+        </div>
         <div className="space-y-4">
           <input
             type="text"
