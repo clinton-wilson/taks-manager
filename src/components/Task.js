@@ -38,9 +38,11 @@ const Task = ({ task, toggleComplete, editTask, deleteTask }) => {
               marginRight: "0.5rem",
             }}
           >
-            {task.text}
+            {task.text} (Due: {task.dueDate})
           </span>
-          <button onClick={handleEdit} style={{ marginRight: "0.5rem" }}>Edit</button>
+          <button onClick={handleEdit} style={{ marginRight: "0.5rem" }}>
+            Edit
+          </button>
         </>
       )}
       <button onClick={() => deleteTask(task.id)}>Delete</button>
